@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gửi Tặng Tập Thể A8</title>
+    <link rel="stylesheet" href="style.css">
+    <link href="https://googleapis.com" rel="stylesheet">
+</head>
+<body>
+    <!-- Thùng chứa hiệu ứng rơi -->
+    <div id="stickers-container"></div>
+
+    <div class="card-container">
+        <div class="main-card">
+            <h1 class="title">Chúc Mừng Ngày 20/11! ✨</h1>
+            <div class="content-box">
+                <p id="typing-text"></p>
+            </div>
+            <button class="btn-music" onclick="toggleMusic()">🎵 Bật/Tắt Nhạc</button>
+        </div>
+    </div>
+
+    <!-- Nhạc nền (Bạn có thể đổi link audio ở đây) -->
+    <audio id="bg-music" loop>
+        <source src="https://soundhelix.com" type="audio/mpeg">
+    </audio>
+
+    <script src="script.js"></script>
+</body>
+</html>
