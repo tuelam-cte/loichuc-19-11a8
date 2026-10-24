@@ -1,39 +1,55 @@
-const textToType = "Thân gửi tập thể lớp A8! Chúc các bạn và cô giáo có một ngày lễ thật ý nghĩa, trọn vẹn niềm vui và luôn luôn hạnh phúc. Mong rằng trang web nhỏ này sẽ mang lại một nụ cười thật tươi cho mọi người ngày hôm nay! 🎉💖";
+const textToType = "Gửi tụi con trai A8... Người ta vẫn bảo thế giới ngoài kia vốn dĩ rất ồn ào, nhưng may mắn sao khi ở trong căn phòng A8 này, chúng mình luôn tìm thấy những niềm vui thật bình dị. Hôm nay là một ngày đặc biệt, tụi con gái chúng mình chẳng muốn chúc những lời hoa mỹ hay rập khuôn đâu. Chỉ mong các cậu luôn giữ được sự kiên định, nụ cười bình yên và sự nhiệt huyết như cách tụi mình vẫn cùng nhau đi qua từng tiết học. Cảm ơn vì đã luôn là một phần không thể thiếu, thanh lặng nhưng vô cùng vững chãi ở bên cạnh hội con gái tụi mình nhé. Chúc mừng ngày 19/11! ✨💖";
 let index = 0;
+const typingSpeed = 55;
 
-function typeWriter() {
+function runTypingEffect() {
     if (index < textToType.length) {
         document.getElementById("typing-text").innerHTML += textToType.charAt(index);
         index++;
-        setTimeout(typeWriter, 50);
+        setTimeout(runTypingEffect, typingSpeed);
     }
 }
 
 window.onload = function() {
-    typeWriter();
-    setInterval(createSticker, 400); // Tần suất rơi vừa phải để máy yếu không bị giật
+    runTypingEffect();
+    setInterval(spawnVisualParticle, 380); 
 };
 
-const icons = ['🌸', '✨', '💖', '🎈', '🍀', '🌹'];
+const visualElements = ['✨', '💖', '🍀', '🌸', '🎈', '☁️'];
 
-function createSticker() {
-    const container = document.getElementById('stickers-container');
-    if(!container) return;
+function spawnVisualParticle() {
+    const space = document.getElementById('particles-background');
+    if (!space) return;
     
-    const sticker = document.createElement('div');
-    sticker.classList.add('sticker');
+    const token = document.createElement('div');
+    token.classList.add('falling-particle');
     
-    sticker.innerText = icons[Math.floor(Math.random() * icons.length)];
-    sticker.style.left = Math.random() * 95 + 'vw';
-    sticker.style.animationDuration = Math.random() * 3 + 4 + 's'; 
-    sticker.style.opacity = Math.random() * 0.6 + 0.4;
+    token.innerText = visualElements[Math.floor(Math.random() * visualElements.length)];
+    token.style.left = Math.random() * 98 + 'vw';
+    token.style.fontSize = Math.random() * 8 + 14 + 'px'; 
+    token.style.animationDuration = Math.random() * 3 + 5 + 's'; 
+    token.style.opacity = Math.random() * 0.5 + 0.3; 
     
-    container.appendChild(sticker);
+    space.appendChild(token);
     
-    setTimeout(() => { sticker.remove(); }, 7000);
+    setTimeout(() => { token.remove(); }, 8000);
 }
 
-function toggleMusic() {
-    const music = document.getElementById("bg-music");
-    if (music.paused) { music.play(); } else { music.pause(); }
+function toggleAudioPlayer() {
+    const stream = document.getElementById("audio-core-player");
+    const indicator = document.getElementById("play-status-text");
+    const block = document.querySelector(".premium-card");
+    
+    if (stream.paused) {
+        stream.play().then(() => {
+            indicator.innerText = "PAUSE";
+            block.classList.add("playing");
+        }).catch(error => {
+            console.log("Trình duyệt chặn tự động phát thanh:", error);
+        });
+    } else {
+        stream.pause();
+        indicator.innerText = "PLAY TRACK";
+        block.classList.remove("playing");
+    }
 }

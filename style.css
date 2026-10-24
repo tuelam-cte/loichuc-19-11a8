@@ -5,84 +5,175 @@
 }
 
 body {
-    background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 100%);
+    background: linear-gradient(135deg, #ffe5ec 0%, #ffc2d1 50%, #f7aef8 100%);
     font-family: 'Quicksand', sans-serif;
     height: 100vh;
     display: flex;
     justify-content: center;
     align-items: center;
     overflow: hidden;
+    perspective: 1000px;
+    -webkit-font-smoothing: antialiased;
 }
 
-.card-container {
-    z-index: 10;
-    width: 90%;
-    max-width: 450px;
+.wrapper {
+    width: 100%;
+    padding: 20px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    transform: translateZ(0); /* Kích hoạt GPU gia tốc phần cứng */
 }
 
-.main-card {
-    background: rgba(255, 255, 255, 0.85);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    border-radius: 24px;
-    padding: 30px;
-    text-align: center;
-    box-shadow: 0 10px 30px rgba(255, 75, 122, 0.15);
-    border: 2px solid rgba(255, 255, 255, 0.6);
-    animation: floating 4s ease-in-out infinite;
-}
-
-.title {
-    font-family: 'Dancing Script', cursive;
-    color: #ff4b7a;
-    font-size: 2.6rem;
-    margin-bottom: 20px;
-    text-shadow: 1px 1px 2px rgba(0,0,0,0.05);
-}
-
-.content-box {
-    min-height: 140px;
-    font-size: 1.1rem;
-    line-height: 1.6;
-    color: #4a4a4a;
-    margin-bottom: 25px;
-    text-align: left;
-}
-
-.btn-music {
-    background: linear-gradient(45deg, #ff4b7a, #ff7597);
-    color: white;
-    border: none;
-    padding: 12px 30px;
-    font-size: 1rem;
-    font-weight: 700;
-    border-radius: 50px;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    box-shadow: 0 5px 15px rgba(255, 75, 122, 0.3);
-}
-
-.btn-music:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 8px 20px rgba(255, 75, 122, 0.4);
-}
-
-.sticker {
-    position: absolute;
-    top: -50px;
-    font-size: 24px;
-    pointer-events: none;
-    animation: fall linear forwards;
+.premium-card {
+    background: rgba(255, 255, 255, 0.78);
+    backdrop-filter: blur(25px) saturate(190%);
+    -webkit-backdrop-filter: blur(25px) saturate(190%);
+    border-radius: 32px;
+    padding: 35px 25px;
+    width: 100%;
+    max-width: 460px;
+    border: 1px solid rgba(255, 255, 255, 0.6);
+    box-shadow: 0 25px 55px rgba(255, 75, 122, 0.15), 
+                inset 0 1px 0 rgba(255, 255, 255, 0.8);
+    transform-style: preserve-3d;
+    animation: gentleFloat 6s ease-in-out infinite;
     will-change: transform;
 }
 
-@keyframes fall {
-    to {
-        transform: translateY(105vh) rotate(360deg);
-    }
+.card-header {
+    text-align: center;
+    margin-bottom: 20px;
 }
 
-@keyframes floating {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+.badge {
+    background: rgba(255, 75, 122, 0.08);
+    color: #ff4b7a;
+    padding: 6px 16px;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    display: inline-block;
+    margin-bottom: 12px;
+    border: 1px solid rgba(255, 75, 122, 0.15);
+}
+
+.main-title {
+    font-family: 'Dancing Script', cursive;
+    color: #ff4b7a;
+    font-size: 2.8rem;
+    line-height: 1.2;
+}
+
+.sub-title {
+    font-size: 0.85rem;
+    color: #928187;
+    font-weight: 700;
+    margin-top: 6px;
+    letter-spacing: 1px;
+    text-transform: uppercase;
+}
+
+.card-body {
+    background: rgba(255, 255, 255, 0.45);
+    border-radius: 24px;
+    padding: 24px;
+    min-height: 180px;
+    border: 1px solid rgba(255, 255, 255, 0.4);
+    margin-bottom: 20px;
+}
+
+.text-dynamic-area {
+    font-size: 1.05rem;
+    line-height: 1.6;
+    color: #4f4246;
+    font-weight: 600;
+    text-align: justify;
+}
+
+.music-player-panel {
+    background: #ffffff;
+    border-radius: 20px;
+    padding: 15px 20px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    box-shadow: 0 8px 25px rgba(255, 75, 122, 0.06);
+    border: 1px solid #ffe5ec;
+}
+
+.track-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.music-icon {
+    font-size: 1.4rem;
+    display: inline-block;
+    transform-origin: center;
+}
+
+/* Hiệu ứng xoay đĩa nhạc đồng bộ mượt mà */
+.premium-card.playing .music-icon {
+    animation: spinDisc 3s linear infinite;
+}
+
+.track-details {
+    display: flex;
+    flex-direction: column;
+}
+
+.song-title {
+    font-weight: 700;
+    color: #2b2124;
+    font-size: 0.95rem;
+}
+
+.artist-name {
+    font-size: 0.8rem;
+    color: #a39599;
+    font-weight: 700;
+}
+
+.control-music-btn {
+    background: linear-gradient(135deg, #ff4b7a 0%, #ff7597 100%);
+    color: white;
+    border: none;
+    padding: 10px 20px;
+    font-family: 'Quicksand', sans-serif;
+    font-size: 0.8rem;
+    font-weight: 700;
+    border-radius: 12px;
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+    box-shadow: 0 4px 15px rgba(255, 75, 122, 0.25);
+}
+
+.control-music-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(255, 75, 122, 0.35);
+}
+
+.falling-particle {
+    position: absolute;
+    top: -50px;
+    pointer-events: none;
+    animation: linearItemFall linear forwards;
+    will-change: transform;
+}
+
+@keyframes linearItemFall {
+    to { transform: translate3d(0, 105vh, 0) rotate(360deg); }
+}
+
+@keyframes gentleFloat {
+    0%, 100% { transform: translate3d(0, 0, 0) rotateX(0) rotateY(0); }
+    50% { transform: translate3d(0, -10px, 0) rotateX(1.5deg) rotateY(1deg); }
+}
+
+@keyframes spinDisc {
+    100% { transform: rotate(360deg); }
 }

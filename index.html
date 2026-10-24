@@ -3,26 +3,47 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gửi Tặng Tập Thể A8</title>
+    <title>A8 Premium Dedication</title>
     <link rel="stylesheet" href="style.css">
     <link href="https://googleapis.com" rel="stylesheet">
 </head>
 <body>
-    <!-- Thùng chứa hiệu ứng rơi -->
-    <div id="stickers-container"></div>
+    <!-- Hệ thống nền tạo hạt siêu mượt chống giật lag -->
+    <div id="particles-background"></div>
 
-    <div class="card-container">
-        <div class="main-card">
-            <h1 class="title">Chúc Mừng Ngày 20/11! ✨</h1>
-            <div class="content-box">
-                <p id="typing-text"></p>
+    <div class="wrapper">
+        <div class="premium-card">
+            <div class="card-header">
+                <span class="badge">A8 Special Edition</span>
+                <h1 class="main-title">Gửi những chàng trai A8 ✨</h1>
+                <div class="sub-title">From Girls of 8A8 with love</div>
             </div>
-            <button class="btn-music" onclick="toggleMusic()">🎵 Bật/Tắt Nhạc</button>
+
+            <div class="card-body">
+                <div class="text-dynamic-area">
+                    <p id="typing-text"></p>
+                </div>
+            </div>
+
+            <div class="card-footer">
+                <div class="music-player-panel">
+                    <div class="track-info">
+                        <span class="music-icon">🎵</span>
+                        <div class="track-details">
+                            <span class="song-title">CORTIS Track</span>
+                            <span class="artist-name">Lofi Premium</span>
+                        </div>
+                    </div>
+                    <button class="control-music-btn" onclick="toggleAudioPlayer()">
+                        <span id="play-status-text">PLAY TRACK</span>
+                    </button>
+                </div>
+            </div>
         </div>
     </div>
 
-    <!-- Nhạc nền (Bạn có thể đổi link audio ở đây) -->
-    <audio id="bg-music" loop>
+    <!-- Luồng âm thanh cấu hình chuẩn cao cấp -->
+    <audio id="audio-core-player" loop preload="auto">
         <source src="https://soundhelix.com" type="audio/mpeg">
     </audio>
 
